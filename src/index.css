@@ -1,0 +1,81 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #0B2434;
+  font-family: 'Karla', sans-serif;
+}
+
+main {
+  margin: 100px auto;
+  background-color: #F5F5F5;
+  height: 650px;
+  width: 80vw;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.title {
+  font-size: 40px;
+  margin: 0px;
+}
+
+.instructions {
+  max-width: 500px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  margin-top: 0;
+  text-align: center;
+}
+
+.dices-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  justify-content: center;
+  gap: 30px;
+}
+
+.dice {
+  width: 60;
+  height: 60;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 2px 2px #00000026;
+  border-radius: 10px;
+  font-size: 22px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.dice-held {
+  background-color: #0B2434;
+  color: wheat;
+}
+
+.counter {
+  font-size: 1.5rem;
+}
+
+
+.btn {
+  width: 150px;
+  height: 50px;
+  color: wheat;
+  font-size: 1.5rem;
+  border: 1px solid white;
+  background-color: #0B2434;
+  box-shadow: 0px 2px 2px 2px #00000026;
+  border-radius: 5px;
+  font-family: 'Karla', sans-serif;
+}
+
+.btn:active {
+  background-color: aliceblue;
+  color: black;
+}
