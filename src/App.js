@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import Dice from './components/Dice'
-import { nanoid } from 'nanoid'
 import Confetti from 'react-confetti'
+import { nanoid } from 'nanoid'
 import { useWindowSize } from '@react-hook/window-size'
+import Dice from './components/Dice'
 import Splash from './pages/splash'
 
 export default function App() {
@@ -17,6 +17,7 @@ export default function App() {
             hold={hold} />
     )
     const [timer, setTimer] = React.useState({ seconds: 0, minutes: 0 })
+    
     React.useEffect(() => {
         if (start) {
             setInterval(() => {
@@ -31,7 +32,7 @@ export default function App() {
         for (let i = 0; i < dices.length; i++) {
             let curr = dices[i]
             flag = true
-            if (dices[0].value != curr.value) {
+            if (dices[0].value !== curr.value) {
                 flag = false
                 break
             }
@@ -67,7 +68,7 @@ export default function App() {
 
     function getNewDices() {
         let newDices = [];
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 15; i++) {
             newDices.push({
                 id: nanoid(),
                 value: Math.ceil(Math.random() * 6),
@@ -108,7 +109,7 @@ export default function App() {
             let newDices = []
             for (let i = 0; i < prevDices.length; i++) {
                 let curr = prevDices[i]
-                if (curr.id == diceID) {
+                if (curr.id === diceID) {
                     newDices.push({
                         ...curr,
                         isHeld: !curr.isHeld

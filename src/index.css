@@ -8,10 +8,11 @@ body {
   font-family: 'Karla', sans-serif;
 }
 
-.splash ,main {
-  margin: 50px auto;
+.splash,
+main {
+  margin: 30px auto;
   background-color: #F5F5F5;
-  height: 650px;
+  height: 800px;
   width: 90vw;
   border-radius: 5px;
   display: flex;
@@ -135,7 +136,6 @@ body {
 .counter {
   font-size: 1.5rem;
 }
-
 
 .btn {
   width: 150px;
