@@ -9,17 +9,16 @@ body {
 }
 
 .splash ,main {
-  margin: 100px auto;
+  margin: 50px auto;
   background-color: #F5F5F5;
   height: 650px;
-  width: 80vw;
+  width: 90vw;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   position: relative;
-
 }
 
 .clock {
