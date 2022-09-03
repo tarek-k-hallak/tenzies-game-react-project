@@ -3,17 +3,27 @@ import Dice from './components/Dice'
 import { nanoid } from 'nanoid'
 import Confetti from 'react-confetti'
 import { useWindowSize } from '@react-hook/window-size'
+import Splash from './pages/splash'
 
 export default function App() {
     const [dices, setDices] = React.useState(getNewDices())
     const [counter, setCounter] = React.useState(0)
     const [win, SetWin] = React.useState(false)
+    const [start, setStart] = React.useState(false)
     const dicesElements = dices.map(dice =>
         <Dice
             key={dice.id}
             dice={dice}
             hold={hold} />
     )
+    const [timer, setTimer] = React.useState({ seconds: 0, minutes: 0 })
+    React.useEffect(() => {
+        if (start) {
+            setInterval(() => {
+                setTimer(prevTime => ({ ...prevTime, seconds: prevTime.seconds + 1 }))
+            }, 1000);
+        }
+    }, [start])
 
     //Win in C++ way B)
     React.useEffect(() => {
@@ -51,9 +61,13 @@ export default function App() {
         }
     }, [dices])
 
+    function startThegame() {
+        setStart(true)
+    }
+
     function getNewDices() {
         let newDices = [];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 5; i++) {
             newDices.push({
                 id: nanoid(),
                 value: Math.ceil(Math.random() * 6),
@@ -85,6 +99,7 @@ export default function App() {
     function reset() {
         setCounter(0)
         setDices(getNewDices)
+        setTimer({ seconds: 0, minutes: 0 })
         SetWin(false)
     }
 
@@ -105,39 +120,52 @@ export default function App() {
             return newDices
         })
     }
-    console.log(useWindowSize)
 
+    console.log("App renderd")
     const { width, height } = useWindowSize()
     return (
-        <main>
-            {win && <Confetti
-                width={width}
-                height={height} />
+        <div>
+            {
+                win && <Confetti
+                    width={width}
+                    height={height} />
             }
-            <h1 className="title">Tenzies
-            </h1>
-            <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.
-            </p>
-            <div className="dices-container">
-                {dicesElements}
-            </div>
-            <label className="counter">
-                {counter}
-            </label>
-            <div className='btns'>
-                {!win &&
-                    <button
-                        className="btn"
-                        onClick={roll}>
-                        Roll
-                    </button>
-                }
-                <button
-                    className="btn"
-                    onClick={reset}>
-                    {win ? "New Game" : "Reset"}
-                </button>
-            </div>
-        </main>
+            {!start
+                ?
+                <div className='splash'>
+                    <Splash
+                        startThegame={startThegame} />
+                </div>
+                :
+                <main>
+                    <div className="header">
+                        <span className='clock'>{timer.minutes + ":" + timer.seconds}</span>
+                        <h1 className="title">Tenzies</h1>
+                    </div>
+                    <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.
+                    </p>
+                    <div className="dices-container">
+                        {dicesElements}
+                    </div>
+                    <label className="counter">
+                        {counter}
+                    </label>
+                    <div className='btns'>
+                        {!win &&
+                            <button
+                                className="btn"
+                                onClick={roll}>
+                                Roll
+                            </button>
+                        }
+                        <button
+                            className="btn"
+                            onClick={reset}>
+                            {win ? "New Game" : "Reset"}
+                        </button>
+                    </div>
+                </main>
+            }
+        </div>
     )
 }
