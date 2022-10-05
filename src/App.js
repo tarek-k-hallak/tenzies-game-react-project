@@ -17,16 +17,16 @@ export default function App() {
             hold={hold} />
     )
     const [timer, setTimer] = React.useState({ seconds: 0, minutes: 0 })
-    
+
     React.useEffect(() => {
-        if (start) {
+        if (start && !win) {
             setInterval(() => {
                 setTimer(prevTime => ({ ...prevTime, seconds: prevTime.seconds + 1 }))
             }, 1000);
         }
-    }, [start])
+    }, [start, win])
 
-    //Win in C++ way B)
+    //Win in C++ way
     React.useEffect(() => {
         let flag
         for (let i = 0; i < dices.length; i++) {
@@ -124,8 +124,9 @@ export default function App() {
 
     console.log("App renderd")
     const { width, height } = useWindowSize()
+    console.log(width)
     return (
-        <div>
+        <div className='container'>
             {
                 win && <Confetti
                     width={width}
